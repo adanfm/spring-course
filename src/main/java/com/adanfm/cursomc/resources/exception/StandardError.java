@@ -3,7 +3,8 @@ package com.adanfm.cursomc.resources.exception;
 import java.io.Serializable;
 
 public class StandardError implements Serializable{
-
+	private static final long serialVersionUID = 1L;
+	
 	private Integer status;
 	private String msg;
 	private Long timestamp;
@@ -38,6 +39,4 @@ public class StandardError implements Serializable{
 	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
-	
-	
 }
