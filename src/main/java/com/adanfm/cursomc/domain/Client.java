@@ -29,6 +29,9 @@ public class Client implements Serializable {
     @ElementCollection
     @CollectionTable(name="phones")
     private Set<String> phones = new HashSet<>();
+    
+    @OneToMany(mappedBy="client")
+    private List<Order> orders = new ArrayList<>();
 
     public Client() {}
 
@@ -96,7 +99,16 @@ public class Client implements Serializable {
         this.phones = phones;
     }
 
-    @Override
+    @OneToMany(mappedBy="client")
+    public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
