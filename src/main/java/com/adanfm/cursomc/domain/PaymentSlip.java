@@ -1,22 +1,23 @@
 package com.adanfm.cursomc.domain;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import com.adanfm.cursomc.domain.enums.StatePayment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class PaymentSlip extends Payment{
     private static final long serialVersionUID = 1L;
     
+    @JsonFormat(pattern="dd/MM/yyyy")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="date_due")
 	private Date dateDue;
     
+    @JsonFormat(pattern="dd/MM/yyyy")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="date_payment")
 	private Date datePayment;

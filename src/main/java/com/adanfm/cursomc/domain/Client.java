@@ -1,8 +1,7 @@
 package com.adanfm.cursomc.domain;
 
 import com.adanfm.cursomc.domain.enums.TypeClient;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -22,7 +21,6 @@ public class Client implements Serializable {
     @Column(name="type_client")
     private Integer typeClient;
 
-    @JsonManagedReference
     @OneToMany(mappedBy="client")
     private List<Address> addresses = new ArrayList<>();
 
@@ -30,6 +28,7 @@ public class Client implements Serializable {
     @CollectionTable(name="phones")
     private Set<String> phones = new HashSet<>();
     
+    @JsonIgnore
     @OneToMany(mappedBy="client")
     private List<Order> orders = new ArrayList<>();
 

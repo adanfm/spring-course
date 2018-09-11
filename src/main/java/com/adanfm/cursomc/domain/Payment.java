@@ -1,7 +1,7 @@
 package com.adanfm.cursomc.domain;
 
 import java.io.Serializable;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -10,9 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.validator.internal.engine.messageinterpolation.parser.EscapedState;
-
 import com.adanfm.cursomc.domain.enums.StatePayment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -22,8 +21,11 @@ abstract public class Payment implements Serializable {
 
     @Id
 	private Integer id;
+    
+    @Column(name="state_payment")
 	private Integer statePayment;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="order_id")
 	@MapsId

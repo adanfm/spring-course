@@ -2,7 +2,8 @@ package com.adanfm.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="order_table")
@@ -25,6 +28,7 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
 	@Column(name="created_at")
 	private Date createdAt;
@@ -39,6 +43,9 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
+	
+	@OneToMany(mappedBy="id.order")
+	private Set<OrderItem> orderItems = new HashSet<>();
 	
 	public Order() {}
 
@@ -88,6 +95,14 @@ public class Order implements Serializable {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	public Set<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 	@Override

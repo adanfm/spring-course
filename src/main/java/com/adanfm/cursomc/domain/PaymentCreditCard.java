@@ -1,13 +1,14 @@
 package com.adanfm.cursomc.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import com.adanfm.cursomc.domain.enums.StatePayment;
 
 @Entity
 public class PaymentCreditCard extends Payment{
     private static final long serialVersionUID = 1L;
     
+    @Column(name="qtd_plots")
 	private Integer qtdPlots;
 	
 	public PaymentCreditCard() {}
