@@ -5,8 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import com.adanfm.cursomc.domain.Category;
+import com.adanfm.cursomc.dto.CategoryDTO;
 import com.adanfm.cursomc.repositories.CategoryRepository;
 import com.adanfm.cursomc.services.exceptions.DataIntegrityException;
 import com.adanfm.cursomc.services.exceptions.ObjectNotFoundException;
@@ -43,5 +47,14 @@ public class CategoryService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("This category can not be deleted because there are products assigned");
 		}
-	}	
+	}
+	
+	public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repository.findAll(pageRequest);
+	}
+	
+	public Category fromDTO(CategoryDTO dto) {
+		return new Category(dto.getId(), dto.getName());
+	}
 }

@@ -2,12 +2,19 @@ package com.adanfm.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.adanfm.cursomc.domain.Category;
 
 public class CategoryDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@NotEmpty(message="This field is required")
+	@Length(min=5, max=80, message="Field must be between 5 and 80 characters")
 	private String name;
 	
 	public CategoryDTO() {}
