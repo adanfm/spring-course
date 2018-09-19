@@ -29,6 +29,10 @@ public class OrderItem implements Serializable {
 		this.qtd = qtd;
 		this.price = price;
 	}
+	
+	public double getSubTotal() {
+		return (price - discount) * qtd;
+	}
 
 	public OrderItemPK getId() {
 		return id;
