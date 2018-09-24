@@ -3,8 +3,10 @@ package com.adanfm.cursomc.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import com.adanfm.cursomc.domain.enums.StatePayment;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
+@JsonTypeName("paymentCreditCard")
 public class PaymentCreditCard extends Payment{
     private static final long serialVersionUID = 1L;
     
